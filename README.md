@@ -153,6 +153,25 @@ cd frontend
 npm run build
 ```
 
+## CI/CD
+
+โปรเจกต์มี GitHub Actions workflow ที่ `.github/workflows/ci.yml`
+
+ระบบจะรันอัตโนมัติเมื่อ:
+
+- push ไปที่ `master` หรือ `main`
+- เปิด pull request เข้า `master` หรือ `main`
+
+CI จะตรวจ:
+
+- ติดตั้ง dependency ของ backend ด้วย `npm ci`
+- generate Prisma client
+- build backend
+- ติดตั้ง dependency ของ frontend ด้วย `npm ci`
+- build frontend
+
+ขั้นตอน deploy จริงยังไม่ได้ผูกไว้ เพราะต้องรู้ปลายทางก่อน เช่น VPS, Docker registry, Render, Railway, Vercel หรือ server ภายในองค์กร
+
 ## หมายเหตุด้านความปลอดภัย
 
 - `.env` ถูก ignore แล้ว
@@ -160,4 +179,3 @@ npm run build
 - รูปที่ upload ระหว่าง development จะอยู่ใน `backend/uploads/` และไม่ควร commit
 - JWT secret ต้องยาวอย่างน้อย 32 ตัวอักษร
 - ควรเปิด rate limiter กลับมาเมื่อนำขึ้น production
-
